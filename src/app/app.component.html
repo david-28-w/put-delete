@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <h2 class="text-center">Lista de Usuarios</h2>
+  <ul class="list-group">
+    <li *ngFor="let usuario of usuarios" class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="usuario-info">
+        <strong>{{ usuario.nombre }}</strong> - {{ usuario.email }} - Empresa: {{ usuario.empresa }}
+      </div>
+      <div class="usuario-actions text-center">
+        <button class="btn btn-warning btn-sm" (click)="seleccionarUsuario(usuario)">
+          <i class="bi bi-pencil"></i> Modificar
+        </button>
+        <button class="btn btn-danger btn-sm" *ngIf="usuario.id" (click)="eliminarUsuario(usuario.id!)">
+          <i class="bi bi-trash"></i> Eliminar
+        </button>
+      </div>
+    </li>
+  </ul>
+
+  <h2 class="mt-4 text-center">Agregar/Modificar Usuario</h2>
+  <form (ngSubmit)="agregarOmodificarUsuario()" class="user-form text-center">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" [(ngModel)]="nuevoUsuario.nombre" name="nombre" class="form-control" id="nombre" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" [(ngModel)]="nuevoUsuario.email" name="email" class="form-control" id="email" required>
+    </div>
+    <div class="mb-3">
+      <label for="empresa" class="form-label">Empresa</label>
+      <input type="text" [(ngModel)]="nuevoUsuario.empresa" name="empresa" class="form-control" id="empresa" required>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-success">
+        {{ nuevoUsuario.id ? 'Modificar Usuario' : 'Agregar Usuario' }}
+      </button>
+    </div>
+  </form>
+</div>
